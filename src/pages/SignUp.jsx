@@ -65,7 +65,6 @@ export default function SignUp() {
 
 
     return (
-        console.log(formik),
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
@@ -79,79 +78,65 @@ export default function SignUp() {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                autoComplete="fname"
                                 name="firstName"
                                 variant="outlined"
-                                required
+                                helperText={(formik.touched.firstName && formik.errors.firstName)? formik.errors.firstName : ""}
                                 fullWidth
                                 id="firstName"
                                 name="firstName"
                                 label="First Name"
                                 values={formik.values.firstName}
                                 onChange={formik.handleChange}
-                                handleChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                touched={formik.touched.firstName}
-                                error={formik.errors.firstName}
-                                autoFocus
+                                error={(formik.touched.firstName && formik.errors.firstName) ? true : false}
+        
+                                
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
-                                required
+                                helperText={(formik.touched.lastName && formik.errors.lastName)? formik.errors.lastName : ""}
                                 fullWidth
                                 id="lastName"
                                 label="Last Name"
                                 name="lastName"
                                 values={formik.values.lastName}
                                 onChange={formik.handleChange}
-                                handleChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                touched={formik.touched.lastName}
-                                error={formik.errors.lastName}
-                                autoComplete="lname"
+                                error={(formik.touched.lastName && formik.errors.lastName) ? true : false}
+                        
+                                
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
-                                required
+                                helperText={(formik.touched.email && formik.errors.email)? formik.errors.email : ""}
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
                                 values={formik.values.email}
                                 onChange={formik.handleChange}
-                                handleChange={formik.handleChange}
+                                error={(formik.touched.email && formik.errors.email) ? true : false}
                                 onBlur={formik.handleBlur}
-                                touched={formik.touched.email}
-                                error={formik.errors.email}
-                                autoComplete="email"
+                                
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
-                                required
+                                helperText={(formik.touched.password && formik.errors.password) ? formik.errors.password : ""}
                                 fullWidth
                                 name="password"
                                 values={formik.values.password}
                                 onChange={formik.handleChange}
-                                handleChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                touched={formik.touched.password}
-                                error={formik.errors.password}
                                 label="Password"
-                                type="password"
                                 id="password"
-                                autoComplete="current-password"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive marketing promotions and updates via email."
+                                error={(formik.touched.password && formik.errors.password) ? true : false}
+                               
                             />
                         </Grid>
                     </Grid>

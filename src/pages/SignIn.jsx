@@ -12,7 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import './styles.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +42,7 @@ export default function SignIn() {
 
   const schema = yup.object().shape({
     email: yup.string().required("This field is required"),
-    password: yup.string().required("This field is required").min(8, "Password must be atleast 8 character"),
+    password: yup.string().required("This field is required"),
 
   })
 
@@ -61,7 +62,6 @@ export default function SignIn() {
 
 
   return (
-    console.log(formik),
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -71,40 +71,33 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={formik.handleSubmit} noValidate>
+        <form className={classes.form} onSubmit={formik.handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email Address"
             name="email"
             values={formik.values.email}
             onChange={formik.handleChange}
-            handleChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            touched={formik.touched.email}
-            error={formik.errors.email}
-            autoComplete="email"
-            autoFocus
+            error={(formik.touched.email && formik.errors.email) ? true : false}
+            helperText={(formik.touched.email && formik.errors.email)? formik.errors.email : ""}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             values={formik.values.password}
             onChange={formik.handleChange}
-            handleChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            touched={formik.touched.password}
-            error={formik.errors.password}
+            error={(formik.touched.password && formik.errors.password) ? true : false}
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            helperText={(formik.touched.password && formik.errors.password)? formik.errors.password : ""}
           />
           <Grid container>
           <Grid item xs={12} sm={6}>
@@ -114,8 +107,8 @@ export default function SignIn() {
             />
             </Grid>
             
-            <Grid xs={12} sm={6}>
-            <Link href="#" variant="body2">
+            <Grid item xs={12} sm={6}>
+            <Link to="/forgotpass" variant="body2" >
               Forgot password?
               </Link>
 
